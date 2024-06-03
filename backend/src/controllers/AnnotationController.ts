@@ -7,20 +7,32 @@ type Annotation = {
   priority: Boolean
 }
 export class AnnotationController {
-  static create(req: Request, res: Response) {
+  static async create(req: Request, res: Response) {
+    console.log('AnnotationController.create');
     const {
       title,
       notes,
-      priority
+      priority = false
     }: Annotation = req.body;
 
     console.log(`${title} | ${notes} | ${priority}`);
+    if (!title || !notes) {
+      return res.status(400).json({
+        error: 'Parameterization error in the request',
+        params: `title: ${title}, notes: ${notes}`
+      })
+    }
+    const annotation = await Annotations.create({
+      title,
+      notes,
+      priority
+    });
+    return res.status(201).json({ annotation })
   }
 
   static async read(req: Request, res: Response) {
-    console.log('ccccccccccccc');
+    console.log('AnnotationController.read');
     const annotations = await Annotations.find();
-    console.log('Annotations: ',annotations);
-    return res.json(annotations)
+    return res.status(200).json(annotations)
   }
 }
