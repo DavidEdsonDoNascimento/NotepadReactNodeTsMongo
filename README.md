@@ -1,6 +1,6 @@
 ### Notepad (React | Typescript | NodeJS | Mongo)
 
-Project contains backend and frontend, using ReactJS + Typescript technologies for the frontend and NodeJS + Typescript + MongoDB for the backend
+Project contains backend and frontend, using ReactJS + Typescript technologies for the frontend and NodeJS + Typescript + MongoDB for the backend (Google Cloud Platform)
 
 To find out the step-by-step process followed to create each part of this project, visit:
 

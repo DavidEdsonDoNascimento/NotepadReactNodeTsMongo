@@ -31,6 +31,29 @@ export class AnnotationController {
     return res.status(201).json({ annotation })
   }
 
+  static async update(req: Request, res: Response) {
+    const { id } = req.params;
+    const { title, notes, priority } = req.body;
+
+    if (!title && !notes && priority === "undefined") {
+      return res.status(400).json({
+        error: 'Parameterization error in the request',
+        params: `title: ${title}, notes: ${notes}`
+      })
+    }
+
+    const annotation = await Annotations.findOne({ _id: id });
+
+    annotation.title = title || annotation.title;
+    annotation.notes = notes || annotation.notes;
+    annotation.priority = priority || annotation.priority || false;
+
+    await annotation.save();
+    return res.status(200).json({
+      isUpdated: true,
+      ...annotation
+    })
+  }
   static async read(req: Request, res: Response) {
     console.log('AnnotationController.read');
     const annotations = await Annotations.find();
