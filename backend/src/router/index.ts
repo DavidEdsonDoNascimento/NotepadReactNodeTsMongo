@@ -5,5 +5,6 @@ const routes = Router();
 
 routes.get('/annotations', AnnotationController.read)
 .post('/annotations', AnnotationController.create)
+.delete('/annotations/:id', AnnotationController.delete)
 
 export { routes };
