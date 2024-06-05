@@ -35,7 +35,7 @@ export class AnnotationController {
     const { id } = req.params;
     const { title, notes, priority } = req.body;
 
-    if (!title && !notes && priority === "undefined") {
+    if (!title && !notes) {
       return res.status(400).json({
         error: 'Parameterization error in the request',
         params: `title: ${title}, notes: ${notes}`
